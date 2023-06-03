@@ -1,0 +1,147 @@
+Zadanie 1
+
+a) 
+a = 9000
+print(a)
+
+b:)
+b = "John"
+print(b)
+
+C)
+a = "John"
+b = "Doe"
+c = "12345"
+result = a + " " + b + " " + c
+print(result)
+
+d)
+x = "word"
+print(x * 6)
+
+e)
+a = 2
+b = 3
+c = 4
+result = str(a * b * c)
+print(result)
+
+f)
+x = "abcdefghij"
+print(x[4])
+
+g)
+x = "abcdefghij"
+print(x[3:])
+
+h)
+x = "abcdefghij"
+print(x[1:7])
+
+i)
+x = "abcdefghij"
+print(x[:-2])
+
+j)
+a = 5
+b = 10
+c = 15
+print(a, b, c)
+
+k)
+a = 5
+b = 10
+c = 15
+addition = a + b + c
+subtraction = b - a
+multiplication = a * b * c
+division = c / a
+print(addition, subtraction, multiplication, division)
+
+l)
+favorite_dishes = ["Pizza", "Sushi", "Burger", "Pasta"]
+print(favorite_dishes)
+
+m)
+favorite_dishes = ["Pizza", "Sushi", "Burger", "Pasta"]
+favorite_drinks = ["Coke", "Water", "Juice", "Coffee"]
+favorite_food_and_drinks = favorite_dishes + favorite_drinks
+print(favorite_food_and_drinks)
+
+n)
+favorite_food_and_drinks = ["Pizza", "Sushi", "Burger", "Pasta", "Coke", "Water", "Juice", "Coffee"]
+favorite_food_and_drinks.sort()
+print(favorite_food_and_drinks)
+
+o)
+list1 = list(range(1, 11))
+list2 = list(range(11, 21))
+combined_list = list1 + list2
+count = len(combined_list)
+print(count)
+
+Zadanie 2
+
+data_dict = {}
+
+for _ in range(3):
+    line = input("Podaj klucz i wartość w formacie 'klucz,wartość': ")
+    key, value = line.split(",")
+    data_dict[key.strip()] = value.strip()
+
+print("dict_keys:", list(data_dict.keys()))
+print("dict_values:", list(data_dict.values()))
+
+Podaj klucz i wartość w formacie 'klucz,wartość': Podaj swoje imię: aa
+Podaj klucz i wartość w formacie 'klucz,wartość': Podaj swoje nazwisko: bb
+Podaj klucz i wartość w formacie 'klucz,wartość': Podaj swój wiek: cc
+dict_keys: ['Podaj swoje imię', 'Podaj swoje nazwisko', 'Podaj swój wiek']
+dict_values: ['aa', 'bb', 'cc']
+
+Zadanie 3
+
+from datetime import date
+
+# Pobranie danych od użytkownika
+day = int(input("Podaj dzień urodzenia: "))
+month = int(input("Podaj miesiąc urodzenia: "))
+year = int(input("Podaj rok urodzenia: "))
+
+# Sprawdzenie poprawności daty
+try:
+    birth_date = date(year, month, day)
+    today = date.today()
+    
+    if birth_date > today:
+        print("Podana data jest niepoprawna.")
+    else:
+        # Obliczenie wieku
+        age = today.year - birth_date.year
+        
+        # Sprawdzenie, czy osoba jest pełnoletnia
+        if today.month < birth_date.month or (today.month == birth_date.month and today.day < birth_date.day):
+            age -= 1
+            
+        if age >= 18:
+            print("Jesteś pełnoletni.")
+        else:
+            print("Nie jesteś pełnoletni.")
+except ValueError:
+    print("Podana data jest niepoprawna.")
+
+Zadanie 4
+
+# Pobranie liczby od użytkownika
+number = int(input("Podaj liczbę: "))
+
+# Sprawdzenie czy liczba jest parzysta
+if number % 2 == 0:
+    print("Liczba jest parzysta.")
+else:
+    print("Liczba jest nieparzysta.")
+
+# Sprawdzenie czy liczba jest podzielna przez 3 lub 5
+if number % 3 == 0 or number % 5 == 0:
+    print("Liczba jest podzielna przez 3 lub 5.")
+else:
+    print("Liczba nie jest podzielna przez 3 ani 5.")
