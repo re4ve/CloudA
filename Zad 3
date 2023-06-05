@@ -1,0 +1,48 @@
+Zad 2
+
+import pandas as pd
+
+# Wczytanie pliku CSV
+df = pd.read_csv('sample_data/california_housing_train.csv')
+
+# Selekcja wierszy z długością geograficzną między -114 a -115
+selected_rows = df[(df['longitude'] >= -115) & (df['longitude'] < -114)]
+
+# Obliczenie średniej populacji dla każdego wiersza
+average_population = selected_rows['population'].mean()
+
+# Wyświetlenie wyniku
+print("Średnia populacja dla wierszy z długością geograficzną między -114 a -115: ", average_population)
+
+Zad 3
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Pobranie danych i wczytanie ich do DataFrame
+url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.test'
+df = pd.read_csv(url, skiprows=1, header=None, names=['age','workclass','fnlwgt','education','education-num','marital-status','occupation','relationship','race','sex','capital-gain','capital-loss','hours-per-week','native-country'])
+
+# Wykres kolumnowy przedstawiający liczbę osób danej płci
+plt.figure(figsize=(8, 4))
+df['sex'].value_counts().plot(kind='bar')
+plt.xticks([0, 1], ['Female', 'Male'])
+plt.xlabel('Sex')
+plt.ylabel('Count')
+plt.title('Number of Individuals by Gender')
+
+# Wykres punktowy przedstawiający zależność między capital-gain a capital-loss
+plt.figure(figsize=(8, 4))
+male_data = df[df['sex'] == ' Male']
+female_data = df[df['sex'] == ' Female']
+plt.scatter(male_data['capital-gain'], male_data['capital-loss'], color='blue', label='Male')
+plt.scatter(female_data['capital-gain'], female_data['capital-loss'], color='red', label='Female')
+plt.xlabel('Capital Gain')
+plt.ylabel('Capital Loss')
+plt.title('Relationship between Capital Gain and Capital Loss')
+plt.legend()
+
+# Wyświetlenie obu wykresów
+plt.tight_layout()
+plt.show()
+
