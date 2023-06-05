@@ -1,0 +1,89 @@
+Zad 1
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Wczytanie danych do dataframe
+df = pd.read_csv("student-mat.csv", sep=";")
+
+# Sprawdzenie danych
+print(df.head())
+
+# Wykres rozrzutu freetime i goout
+plt.figure(figsize=(8, 4))
+sns.scatterplot(data=df, x='freetime', y='goout', hue='age')
+plt.title('Freetime vs Goout')
+plt.xlabel('Freetime')
+plt.ylabel('Goout')
+
+# Wykres rozrzutu age i goout
+plt.figure(figsize=(8, 4))
+sns.scatterplot(data=df, x='age', y='goout', hue='freetime')
+plt.title('Age vs Goout')
+plt.xlabel('Age')
+plt.ylabel('Goout')
+
+# Wykres rozrzutu age i freetime
+plt.figure(figsize=(8, 4))
+sns.scatterplot(data=df, x='age', y='freetime', hue='goout')
+plt.title('Age vs Freetime')
+plt.xlabel('Age')
+plt.ylabel('Freetime')
+
+# Sprawdzenie czy wymagane jest czyszczenie danych
+missing_values = df.isnull().sum()
+print("Liczba brakujących wartości w poszczególnych kolumnach:")
+print(missing_values)
+
+
+# Sprawdzenie czy dane zostały oczyszczone
+missing_values_cleaned = df_cleaned.isnull().sum()
+print("Liczba brakujących wartości po oczyszczeniu danych:")
+print(missing_values_cleaned)
+
+# Wyświetlenie wykresów
+plt.tight_layout()
+plt.show()
+
+Zad 2
+
+import re
+
+
+sentence = "Umówiłem się do lekarza, moja wizyta odbędzie się 16/04/2022"
+
+# Regex do znajdowania dat
+pattern = r"\b\d{2}/\d{2}/\d{4}\b"
+
+# Znajdowanie dat w zdaniu za pomocą metody findall() z regexem
+dates = re.findall(pattern, sentence)
+
+# Wyświetlanie znalezionych dat
+print(dates)
+
+Zad 3
+
+import re
+import string
+from bs4 import BeautifulSoup
+from nltk.stem import WordNetLemmatizer
+
+# Tekst
+text = "<h1>Małżeństwo króla wzbudziło liczne <b>kontrowersje.</br></h1>"
+
+# Usunięcie znaczników HTML
+clean_text = BeautifulSoup(text, "html.parser").text
+
+# Usunięcie znaków interpunkcyjnych
+clean_text = re.sub(f"[{string.punctuation}]", "", clean_text)
+
+# Zamiana na małe litery
+clean_text = clean_text.lower()
+
+lemmatizer = WordNetLemmatizer()
+tokens = clean_text.split()
+lemmatized_tokens = [lemmatizer.lemmatize(token) for token in tokens]
+
+# Wyświetlenie wyniku
+print(lemmatized_tokens)
