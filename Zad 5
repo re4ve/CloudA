@@ -1,0 +1,33 @@
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.naive_bayes import MultinomialNB
+from sklearn import metrics
+
+# 1. Podział danych na zbiór treningowy i testowy
+data = pd.read_csv('rotten_tomatoes.csv')
+train_data, test_data = train_test_split(data, test_size=0.3, random_state=42)
+
+# 2. Przetwarzanie danych
+train_data['Phrase'] = train_data['Phrase'].apply(preprocess_text)
+test_data['Phrase'] = test_data['Phrase'].apply(preprocess_text)
+
+# 3. Tworzenie wektorów cech
+vectorizer = TfidfVectorizer()
+X_train = create_features(vectorizer, train_data['Phrase'])
+X_test = create_features(vectorizer, test_data['Phrase'])
+y_train = train_data['Sentiment']
+y_test = test_data['Sentiment']
+
+# 4. Tworzenie modelu
+model = MultinomialNB()
+
+# 5. Trenowanie modelu
+train_model(model, X_train, y_train)
+
+# 6. Predykcja na zbiorze testowym
+predicted_sentiments = predict_sentiment(model, X_test)
+
+# 7. Ocena skuteczności
+accuracy = calculate_accuracy(predicted_sentiments, y_test)
+print('Skuteczność modelu: {:.2f}%'.format(accuracy * 100))
